@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  mcp-registry:
+    image: node:20-alpine
+    container_name: mcp-private-registry
+    working_dir: /app
+    volumes:
+      - ./:/app
+      - mcp-data:/app/data
+    ports:
+      - "3443:3443"
+    environment:
+      - MCP_PORT=3443
+      - MCP_ADMIN=${MCP_ADMIN:-admin@company.com}
+      - NODE_ENV=production
+    command: node dist/enterprise/server.js
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-q", "http://localhost:3443/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  mcp-data:
