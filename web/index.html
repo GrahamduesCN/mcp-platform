@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MCP Hub - Discover & Install MCP Servers</title>
+<style>
+:root {
+  --color-bg: #ffffff;
+  --color-bg-secondary: #f6f8fa;
+  --color-text: #24292f;
+  --color-text-secondary: #656d76;
+  --color-text-muted: #8b949e;
+  --color-border: #d0d7de;
+  --color-blue: #0969da;
+  --color-blue-hover: #0550ae;
+  --color-green: #1a7f37;
+  --color-orange: #bf8700;
+  --color-purple: #8250df;
+  --color-card-bg: #ffffff;
+  --color-footer: #24292f;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-lg: 0 4px 12px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
+  --max-width: 1200px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.6;
+}
+
+a { color: var(--color-blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+
+/* Nav */
+.nav {
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.nav-logo {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-logo:hover { text-decoration: none; }
+.nav-logo svg { width: 28px; height: 28px; }
+.nav-center {
+  flex: 1;
+  max-width: 480px;
+  margin: 0 40px;
+  position: relative;
+}
+.nav-search {
+  width: 100%;
+  padding: 8px 12px 8px 36px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: 14px;
+  background: var(--color-bg-secondary);
+  color: var(--color-text);
+  outline: none;
+  transition: border-color 0.15s;
+}
+.nav-search:focus { border-color: var(--color-blue); box-shadow: 0 0 0 3px rgba(9,105,218,0.1); }
+.nav-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+.nav-links { display: flex; align-items: center; gap: 16px; }
+.nav-link {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text);
+  padding: 6px 12px;
+  border-radius: var(--radius);
+  transition: background 0.15s;
+}
+.nav-link:hover { background: var(--color-bg-secondary); text-decoration: none; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  transition: all 0.15s;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+.btn-primary {
+  background: var(--color-blue);
+  color: #fff;
+  border-color: var(--color-blue);
+}
+.btn-primary:hover { background: var(--color-blue-hover); border-color: var(--color-blue-hover); }
+.btn-lg { padding: 12px 24px; font-size: 16px; border-radius: var(--radius-lg); }
+
+/* Hero */
+.hero {
+  text-align: center;
+  padding: 80px 24px 64px;
+  background: linear-gradient(180deg, var(--color-bg-secondary) 0%, var(--color-bg) 100%);
+}
+.hero h1 {
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+}
+.hero-subtitle {
+  font-size: 20px;
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  margin: 0 auto 32px;
+}
+.hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+/* Stats */
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  padding: 40px 24px;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+.stat-item { text-align: center; }
+.stat-value { font-size: 28px; font-weight: 700; }
+.stat-label { font-size: 14px; color: var(--color-text-secondary); margin-top: 4px; }
+
+/* Section */
+.section { padding: 64px 0; }
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+.section-title { font-size: 24px; font-weight: 700; }
+.section-link { font-size: 14px; }
+
+/* Server Cards Grid */
+.server-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
+}
+.server-card {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  transition: all 0.2s;
+}
+.server-card:hover {
+  border-color: var(--color-blue);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+.server-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.server-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.server-name { font-size: 16px; font-weight: 600; }
+.server-author { font-size: 13px; color: var(--color-text-secondary); }
+.server-desc {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  margin-bottom: 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.server-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.tag {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  background: var(--color-bg-secondary);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+}
+.server-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+.server-meta-item { display: flex; align-items: center; gap: 4px; }
+
+/* Footer */
+.footer {
+  background: var(--color-footer);
+  color: #8b949e;
+  padding: 48px 24px;
+  margin-top: 64px;
+}
+.footer-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.footer-brand { font-size: 18px; font-weight: 700; color: #fff; }
+.footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+.footer-links a { color: #8b949e; font-size: 14px; }
+.footer-links a:hover { color: #fff; text-decoration: none; }
+.footer-sponsor {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.footer-sponsor-text { font-size: 14px; }
+.btn-sponsor {
+  background: #ffc439;
+  color: #24292f;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.btn-sponsor:hover { background: #f0b800; text-decoration: none; }
+
+/* No results */
+.no-results {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--color-text-secondary);
+  grid-column: 1 / -1;
+}
+.no-results h3 { font-size: 18px; margin-bottom: 8px; }
+
+/* Dark theme */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #0d1117;
+    --color-bg-secondary: #161b22;
+    --color-text: #e6edf3;
+    --color-text-secondary: #8b949e;
+    --color-text-muted: #6e7681;
+    --color-border: #30363d;
+    --color-card-bg: #161b22;
+    --color-footer: #0d1117;
+  }
+  .hero {
+    background: linear-gradient(180deg, var(--color-bg-secondary) 0%, var(--color-bg) 100%);
+  }
+  .btn { background: var(--color-bg-secondary); color: var(--color-text); }
+  .nav-search { background: #0d1117; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 32px; }
+  .hero-subtitle { font-size: 16px; }
+  .nav-center { display: none; }
+  .stats { gap: 24px; }
+  .server-grid { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" role="navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <svg viewBox="0 0 28 28" fill="none"><rect x="2" y="2" width="24" height="24" rx="6" fill="#0969da"/><text x="8" y="19" font-size="14" fill="#fff" font-weight="bold" font-family="sans-serif">M</text></svg>
+      MCP Hub
+    </a>
+    <div class="nav-center">
+      <span class="nav-search-icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85z"/></svg>
+      </span>
+      <input type="text" class="nav-search" id="globalSearch" placeholder="Search MCP servers..." oninput="filterServers()">
+    </div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Market</a>
+      <a href="pricing.html" class="nav-link">Pricing</a>
+      <a href="dashboard.html" class="nav-link">Dashboard</a>
+      <a href="https://github.com" class="btn">Submit Server</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <h1>Discover & Install MCP Servers</h1>
+    <p class="hero-subtitle">The open marketplace for Model Context Protocol servers. Find, share, and connect AI tools in seconds.</p>
+    <div class="hero-actions">
+      <a href="#servers" class="btn btn-primary btn-lg">Browse Servers</a>
+      <a href="pricing.html" class="btn btn-lg">View Pricing</a>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat-item">
+    <div class="stat-value">200+</div>
+    <div class="stat-label">MCP Servers</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-value">50K+</div>
+    <div class="stat-label">Weekly Installs</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-value">5K+</div>
+    <div class="stat-label">Contributors</div>
+  </div>
+</div>
+
+<main class="section" id="servers">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Featured Servers</h2>
+      <a href="#" class="section-link">View all &rarr;</a>
+    </div>
+    <div class="server-grid" id="serverGrid">
+    </div>
+    <div class="no-results" id="noResults" style="display:none;">
+      <h3>No servers found</h3>
+      <p>Try a different search term or browse all servers.</p>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">MCP Hub</div>
+      <div style="margin-top:4px;font-size:13px;">&copy; 2026 MCP Hub. Open source project.</div>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Market</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="#">Docs</a>
+      <a href="#">GitHub</a>
+    </div>
+    <div class="footer-sponsor">
+      <span class="footer-sponsor-text">Support the project</span>
+      <a href="https://paypal.me/GrahamduesCN" target="_blank" rel="noopener" class="btn-sponsor">&#9825; Sponsor</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const servers = [
+  {
+    id: 'mcp-filesystem',
+    name: 'MCP Filesystem',
+    author: 'anthropic',
+    icon: '📁',
+    iconBg: '#ddf4ff',
+    desc: 'Secure file system access for AI agents. Read, write, and manage files across your workspace.',
+    tags: ['official', 'files', 'tool'],
+    stars: 2847,
+    downloads: 156000,
+    version: '1.2.0',
+    license: 'MIT'
+  },
+  {
+    id: 'mcp-github',
+    name: 'MCP GitHub',
+    author: 'github',
+    icon: '🐙',
+    iconBg: '#f6f8fa',
+    desc: 'Full GitHub API integration. Manage repos, issues, PRs, and actions directly from AI.',
+    tags: ['github', 'git', 'api'],
+    stars: 3921,
+    downloads: 284000,
+    version: '2.0.1',
+    license: 'MIT'
+  },
+  {
+    id: 'mcp-postgres',
+    name: 'MCP PostgreSQL',
+    author: 'community',
+    icon: '🐘',
+    iconBg: '#e8f5e9',
+    desc: 'Connect AI to PostgreSQL databases. Run queries, explore schemas, and analyze data.',
+    tags: ['database', 'sql', 'postgres'],
+    stars: 1856,
+    downloads: 92000,
+    version: '1.5.3',
+    license: 'Apache-2.0'
+  },
+  {
+    id: 'mcp-brave-search',
+    name: 'MCP Brave Search',
+    author: 'community',
+    icon: '🔍',
+    iconBg: '#fff3e0',
+    desc: 'Web search and local search capabilities via Brave Search API. Real-time results.',
+    tags: ['search', 'web', 'api'],
+    stars: 1234,
+    downloads: 67000,
+    version: '0.9.0',
+    license: 'MIT'
+  },
+  {
+    id: 'mcp-slack',
+    name: 'MCP Slack',
+    author: 'community',
+    icon: '💬',
+    iconBg: '#e3f2fd',
+    desc: 'Slack workspace integration. Send messages, read channels, and manage conversations.',
+    tags: ['slack', 'messaging', 'api'],
+    stars: 987,
+    downloads: 45000,
+    version: '1.1.0',
+    license: 'MIT'
+  },
+  {
+    id: 'mcp-puppeteer',
+    name: 'MCP Puppeteer',
+    author: 'community',
+    icon: '🌐',
+    iconBg: '#fce4ec',
+    desc: 'Browser automation for AI. Navigate pages, take screenshots, and interact with web apps.',
+    tags: ['browser', 'automation', 'puppeteer'],
+    stars: 1654,
+    downloads: 78000,
+    version: '1.3.2',
+    license: 'MIT'
+  }
+];
+
+function renderServers(list) {
+  const grid = document.getElementById('serverGrid');
+  const noResults = document.getElementById('noResults');
+
+  if (list.length === 0) {
+    grid.innerHTML = '';
+    noResults.style.display = 'block';
+    return;
+  }
+
+  noResults.style.display = 'none';
+  grid.innerHTML = list.map(s => `
+    <a href="server.html?id=${s.id}" class="server-card" style="text-decoration:none;color:inherit;">
+      <div class="server-card-header">
+        <div class="server-icon" style="background:${s.iconBg}">${s.icon}</div>
+        <div>
+          <div class="server-name">${s.name}</div>
+          <div class="server-author">by ${s.author}</div>
+        </div>
+      </div>
+      <div class="server-desc">${s.desc}</div>
+      <div class="server-tags">
+        ${s.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+      </div>
+      <div class="server-meta">
+        <span class="server-meta-item">&#9733; ${s.stars.toLocaleString()}</span>
+        <span class="server-meta-item">&#8595; ${s.downloads.toLocaleString()}</span>
+        <span>v${s.version}</span>
+      </div>
+    </a>
+  `).join('');
+}
+
+function filterServers() {
+  const query = document.getElementById('globalSearch').value.toLowerCase().trim();
+  if (!query) { renderServers(servers); return; }
+  const filtered = servers.filter(s =>
+    s.name.toLowerCase().includes(query) ||
+    s.author.toLowerCase().includes(query) ||
+    s.tags.some(t => t.toLowerCase().includes(query)) ||
+    s.desc.toLowerCase().includes(query)
+  );
+  renderServers(filtered);
+}
+
+renderServers(servers);
+</script>
+</body>
+</html>

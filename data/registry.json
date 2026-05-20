@@ -1,0 +1,93 @@
+{
+  "servers": [
+    {
+      "name": "@anthropic/mcp-server-filesystem",
+      "description": "Secure filesystem operations with configurable access controls. Read, write, and manage files through MCP.",
+      "version": "0.6.2",
+      "author": "Anthropic",
+      "installCommand": "npm install -g @anthropic/mcp-server-filesystem",
+      "githubUrl": "https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem",
+      "tags": [
+        "filesystem",
+        "file",
+        "io",
+        "storage"
+      ],
+      "downloads": 28750,
+      "createdAt": "2024-11-25T00:00:00.000Z",
+      "updatedAt": "2025-05-10T00:00:00.000Z"
+    },
+    {
+      "name": "@anthropic/mcp-server-github",
+      "description": "GitHub API integration for repository management, issues, pull requests, and code search.",
+      "version": "0.5.0",
+      "author": "Anthropic",
+      "installCommand": "npm install -g @anthropic/mcp-server-github",
+      "githubUrl": "https://github.com/modelcontextprotocol/servers/tree/main/src/github",
+      "tags": [
+        "github",
+        "git",
+        "repository",
+        "issues",
+        "pr",
+        "devtools"
+      ],
+      "downloads": 22300,
+      "createdAt": "2024-11-25T00:00:00.000Z",
+      "updatedAt": "2025-04-22T00:00:00.000Z"
+    },
+    {
+      "name": "@anthropic/mcp-server-postgres",
+      "description": "PostgreSQL database integration with query execution, schema inspection, and connection pooling.",
+      "version": "0.4.1",
+      "author": "Anthropic",
+      "installCommand": "npm install -g @anthropic/mcp-server-postgres",
+      "githubUrl": "https://github.com/modelcontextprotocol/servers/tree/main/src/postgres",
+      "tags": [
+        "postgres",
+        "database",
+        "sql",
+        "data",
+        "infrastructure"
+      ],
+      "downloads": 15900,
+      "createdAt": "2024-12-10T00:00:00.000Z",
+      "updatedAt": "2025-03-15T00:00:00.000Z"
+    },
+    {
+      "name": "@anthropic/mcp-server-slack",
+      "description": "Slack workspace integration for messaging, channel management, and real-time notifications.",
+      "version": "0.3.0",
+      "author": "Anthropic",
+      "installCommand": "npm install -g @anthropic/mcp-server-slack",
+      "githubUrl": "https://github.com/modelcontextprotocol/servers/tree/main/src/slack",
+      "tags": [
+        "slack",
+        "messaging",
+        "communication",
+        "notification",
+        "collaboration"
+      ],
+      "downloads": 12450,
+      "createdAt": "2024-12-20T00:00:00.000Z",
+      "updatedAt": "2025-05-01T00:00:00.000Z"
+    },
+    {
+      "name": "@anthropic/mcp-server-weather",
+      "description": "Real-time weather data and forecasts using OpenWeatherMap API integration.",
+      "version": "0.2.0",
+      "author": "Anthropic",
+      "installCommand": "npm install -g @anthropic/mcp-server-weather",
+      "githubUrl": "https://github.com/modelcontextprotocol/servers/tree/main/src/weather",
+      "tags": [
+        "weather",
+        "forecast",
+        "api",
+        "utility"
+      ],
+      "downloads": 8970,
+      "createdAt": "2025-01-15T00:00:00.000Z",
+      "updatedAt": "2025-04-10T00:00:00.000Z"
+    }
+  ]
+}

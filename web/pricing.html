@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing - MCP Hub</title>
+<style>
+:root {
+  --color-bg: #ffffff;
+  --color-bg-secondary: #f6f8fa;
+  --color-text: #24292f;
+  --color-text-secondary: #656d76;
+  --color-text-muted: #8b949e;
+  --color-border: #d0d7de;
+  --color-blue: #0969da;
+  --color-blue-hover: #0550ae;
+  --color-green: #1a7f37;
+  --color-purple: #8250df;
+  --color-orange: #bf8700;
+  --color-card-bg: #ffffff;
+  --color-footer: #24292f;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-lg: 0 4px 24px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04);
+  --max-width: 1200px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.6;
+}
+
+a { color: var(--color-blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+
+/* Nav */
+.nav {
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.nav-logo {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-logo:hover { text-decoration: none; }
+.nav-logo svg { width: 28px; height: 28px; }
+.nav-links { display: flex; align-items: center; gap: 16px; }
+.nav-link { font-size: 14px; font-weight: 500; color: var(--color-text); padding: 6px 12px; border-radius: var(--radius); }
+.nav-link:hover { background: var(--color-bg-secondary); text-decoration: none; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  transition: all 0.15s;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+.btn-primary { background: var(--color-blue); color: #fff; border-color: var(--color-blue); }
+.btn-primary:hover { background: var(--color-blue-hover); border-color: var(--color-blue-hover); }
+
+/* Hero */
+.hero {
+  text-align: center;
+  padding: 72px 24px 48px;
+  background: linear-gradient(180deg, var(--color-bg-secondary) 0%, var(--color-bg) 100%);
+}
+.hero h1 { font-size: 40px; font-weight: 800; margin-bottom: 12px; }
+.hero-subtitle { font-size: 18px; color: var(--color-text-secondary); max-width: 520px; margin: 0 auto; }
+
+/* Pricing Grid */
+.pricing-section { padding: 48px 0 64px; }
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  align-items: start;
+}
+.pricing-card {
+  background: var(--color-card-bg);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  position: relative;
+  transition: all 0.2s;
+}
+.pricing-card:hover {
+  border-color: var(--color-blue);
+  box-shadow: var(--shadow-lg);
+}
+.pricing-card.featured {
+  border-color: var(--color-blue);
+  box-shadow: var(--shadow-lg);
+  transform: scale(1.02);
+}
+.pricing-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-blue);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 16px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.pricing-name { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+.pricing-desc { font-size: 14px; color: var(--color-text-secondary); margin-bottom: 24px; min-height: 40px; }
+.pricing-price {
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--color-border);
+}
+.pricing-amount {
+  font-size: 40px;
+  font-weight: 800;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+.pricing-period { font-size: 16px; font-weight: 400; color: var(--color-text-secondary); }
+.pricing-free { font-size: 32px; font-weight: 800; color: var(--color-green); }
+.pricing-features { margin-bottom: 24px; }
+.pricing-features h4 { font-size: 14px; font-weight: 600; margin-bottom: 12px; color: var(--color-text-secondary); }
+.feature-list { list-style: none; }
+.feature-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px 0;
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}
+.feature-check {
+  color: var(--color-green);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.feature-muted { opacity: 0.5; }
+
+.btn-block {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.btn-paypal {
+  background: #ffc439;
+  color: #24292f;
+  border-color: #ffc439;
+  gap: 8px;
+}
+.btn-paypal:hover { background: #f0b800; border-color: #f0b800; text-decoration: none; }
+.btn-outline-primary {
+  background: transparent;
+  border-color: var(--color-blue);
+  color: var(--color-blue);
+}
+.btn-outline-primary:hover { background: var(--color-blue); color: #fff; text-decoration: none; }
+
+/* FAQ */
+.faq-section { padding: 48px 0 64px; border-top: 1px solid var(--color-border); }
+.faq-title { font-size: 24px; font-weight: 700; text-align: center; margin-bottom: 40px; }
+.faq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 32px; }
+.faq-item h4 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+.faq-item p { font-size: 14px; color: var(--color-text-secondary); }
+
+/* Footer */
+.footer {
+  background: var(--color-footer);
+  color: #8b949e;
+  padding: 48px 24px;
+}
+.footer-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.footer-brand { font-size: 18px; font-weight: 700; color: #fff; }
+.footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+.footer-links a { color: #8b949e; font-size: 14px; }
+.footer-links a:hover { color: #fff; text-decoration: none; }
+.footer-sponsor { display: flex; align-items: center; gap: 12px; }
+.footer-sponsor-text { font-size: 14px; }
+.btn-sponsor-footer {
+  background: #ffc439;
+  color: #24292f;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.btn-sponsor-footer:hover { background: #f0b800; text-decoration: none; }
+
+/* Dark theme */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #0d1117;
+    --color-bg-secondary: #161b22;
+    --color-text: #e6edf3;
+    --color-text-secondary: #8b949e;
+    --color-text-muted: #6e7681;
+    --color-border: #30363d;
+    --color-card-bg: #161b22;
+    --color-footer: #0d1117;
+  }
+  .hero { background: linear-gradient(180deg, var(--color-bg-secondary) 0%, var(--color-bg) 100%); }
+  .btn { background: var(--color-bg-secondary); color: var(--color-text); }
+}
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: 28px; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .pricing-card.featured { transform: none; }
+  .faq-grid { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" role="navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <svg viewBox="0 0 28 28" fill="none"><rect x="2" y="2" width="24" height="24" rx="6" fill="#0969da"/><text x="8" y="19" font-size="14" fill="#fff" font-weight="bold" font-family="sans-serif">M</text></svg>
+      MCP Hub
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Market</a>
+      <a href="pricing.html" class="nav-link">Pricing</a>
+      <a href="dashboard.html" class="nav-link">Dashboard</a>
+      <a href="https://github.com" class="btn">Submit Server</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <h1>Simple, transparent pricing</h1>
+    <p class="hero-subtitle">From open-source community to enterprise-grade deployment. Choose the plan that fits your needs.</p>
+  </div>
+</section>
+
+<section class="pricing-section">
+  <div class="container">
+    <div class="pricing-grid">
+      <!-- Community -->
+      <div class="pricing-card">
+        <div class="pricing-name">Community</div>
+        <div class="pricing-desc">Perfect for individual developers and small projects.</div>
+        <div class="pricing-price">
+          <div class="pricing-free">Free</div>
+          <div class="pricing-period">Forever</div>
+        </div>
+        <div class="pricing-features">
+          <h4>Includes:</h4>
+          <ul class="feature-list">
+            <li><span class="feature-check">&#10003;</span> Access to all community servers</li>
+            <li><span class="feature-check">&#10003;</span> Open-source self-hosting</li>
+            <li><span class="feature-check">&#10003;</span> CLI installation tool</li>
+            <li><span class="feature-check">&#10003;</span> Community support</li>
+            <li><span class="feature-check">&#10003;</span> 1 team member</li>
+            <li><span class="feature-check">&#10003;</span> Public server listing</li>
+            <li><span class="feature-muted feature-check">&#10007;</span> SSO / SAML</li>
+            <li><span class="feature-muted feature-check">&#10007;</span> Advanced monitoring</li>
+          </ul>
+        </div>
+        <a href="https://github.com" class="btn-block btn-outline-primary">Get Started Free</a>
+      </div>
+
+      <!-- Pro -->
+      <div class="pricing-card featured">
+        <div class="pricing-badge">Most Popular</div>
+        <div class="pricing-name">Pro</div>
+        <div class="pricing-desc">For growing teams that need collaboration and support.</div>
+        <div class="pricing-price">
+          <div class="pricing-amount">
+            $199<span class="pricing-period">/month</span>
+          </div>
+        </div>
+        <div class="pricing-features">
+          <h4>Everything in Community, plus:</h4>
+          <ul class="feature-list">
+            <li><span class="feature-check">&#10003;</span> SSO / SAML authentication</li>
+            <li><span class="feature-check">&#10003;</span> Usage monitoring dashboard</li>
+            <li><span class="feature-check">&#10003;</span> Up to 3 teams</li>
+            <li><span class="feature-check">&#10003;</span> Priority email support</li>
+            <li><span class="feature-check">&#10003;</span> Private server registry</li>
+            <li><span class="feature-check">&#10003;</span> 99.9% uptime SLA</li>
+            <li><span class="feature-check">&#10003;</span> Custom branding</li>
+            <li><span class="feature-check">&#10003;</span> API access (10K req/day)</li>
+          </ul>
+        </div>
+        <a href="https://paypal.me/GrahamduesCN/199" target="_blank" rel="noopener" class="btn-block btn-paypal">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 01-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797H9.19c-.524 0-.973.385-1.055.902l-1.06 6.704zm5.475-7.931h.54c3.443 0 6.137-1.405 6.924-5.463.03-.154.058-.305.083-.455.48-3.12-.045-5.24-1.648-6.845C16.923.195 14.77-.176 11.574.12H6.406a.98.98 0 00-.973.83L3.034 18.8c-.036.256.165.48.422.48h3.07l.773-4.874a1.367 1.367 0 011.342-1.17h1.91z"/></svg>
+          Subscribe with PayPal
+        </a>
+      </div>
+
+      <!-- Enterprise -->
+      <div class="pricing-card">
+        <div class="pricing-name">Enterprise</div>
+        <div class="pricing-desc">For large organizations with advanced security requirements.</div>
+        <div class="pricing-price">
+          <div class="pricing-amount">
+            $499<span class="pricing-period">/month</span>
+          </div>
+        </div>
+        <div class="pricing-features">
+          <h4>Everything in Pro, plus:</h4>
+          <ul class="feature-list">
+            <li><span class="feature-check">&#10003;</span> Private cloud deployment</li>
+            <li><span class="feature-check">&#10003;</span> Full audit logging</li>
+            <li><span class="feature-check">&#10003;</span> Unlimited teams</li>
+            <li><span class="feature-check">&#10003;</span> 99.99% uptime SLA</li>
+            <li><span class="feature-check">&#10003;</span> Dedicated support engineer</li>
+            <li><span class="feature-check">&#10003;</span> Custom integrations</li>
+            <li><span class="feature-check">&#10003;</span> Advanced security scanning</li>
+            <li><span class="feature-check">&#10003;</span> Unlimited API access</li>
+          </ul>
+        </div>
+        <a href="https://paypal.me/GrahamduesCN/499" target="_blank" rel="noopener" class="btn-block btn-paypal">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 01-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797H9.19c-.524 0-.973.385-1.055.902l-1.06 6.704zm5.475-7.931h.54c3.443 0 6.137-1.405 6.924-5.463.03-.154.058-.305.083-.455.48-3.12-.045-5.24-1.648-6.845C16.923.195 14.77-.176 11.574.12H6.406a.98.98 0 00-.973.83L3.034 18.8c-.036.256.165.48.422.48h3.07l.773-4.874a1.367 1.367 0 011.342-1.17h1.91z"/></svg>
+          Subscribe with PayPal
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq-section">
+  <div class="container">
+    <h2 class="faq-title">Frequently Asked Questions</h2>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <h4>Can I switch plans later?</h4>
+        <p>Yes! You can upgrade or downgrade at any time. Changes take effect immediately and billing is prorated.</p>
+      </div>
+      <div class="faq-item">
+        <h4>What counts as a team?</h4>
+        <p>A team is a group of users sharing the same server registry and configuration. Pro supports up to 3 teams, Enterprise has no limit.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Is there a free trial?</h4>
+        <p>Pro and Enterprise plans come with a 14-day free trial. No credit card required to start.</p>
+      </div>
+      <div class="faq-item">
+        <h4>What payment methods do you accept?</h4>
+        <p>PayPal is our primary payment processor. Enterprise customers can also pay via bank transfer upon request.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">MCP Hub</div>
+      <div style="margin-top:4px;font-size:13px;">&copy; 2026 MCP Hub. Open source project.</div>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Market</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="#">Docs</a>
+      <a href="#">GitHub</a>
+    </div>
+    <div class="footer-sponsor">
+      <span class="footer-sponsor-text">Support the project</span>
+      <a href="https://paypal.me/GrahamduesCN" target="_blank" rel="noopener" class="btn-sponsor-footer">&#9825; Sponsor</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

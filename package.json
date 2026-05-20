@@ -1,0 +1,35 @@
+{
+  "name": "mcp-platform",
+  "version": "1.0.0",
+  "description": "MCP Server Management Platform - Discover, install, and publish Model Context Protocol servers",
+  "main": "dist/server.js",
+  "bin": {
+    "mcp": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "dev": "tsc && node dist/server.js",
+    "cli": "node dist/cli.js"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "ai",
+    "agent",
+    "marketplace",
+    "cli",
+    "server-management"
+  ],
+  "author": "MCP Platform Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.2"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^11.1.0",
+    "ora": "^5.4.1"
+  }
+}
