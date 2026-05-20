@@ -578,5 +578,23 @@ if (data.features) {
   document.getElementById('serverFeatures').innerHTML = data.features.map(f => '<li>' + f + '</li>').join('');
 }
 </script>
+
+<script>
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  var id = params.get("id") || "mcp-github";
+  fetch("registry.json").then(r=>r.json()).then(function(data){
+    var s = data.find(function(x){return x.name===id}) || data[0];
+    if (!s) return;
+    document.getElementById("s-name") && (document.getElementById("s-name").textContent = s.name);
+    document.getElementById("s-desc") && (document.getElementById("s-desc").textContent = s.description);
+    document.getElementById("s-version") && (document.getElementById("s-version").textContent = "v" + s.version);
+    document.getElementById("s-author") && (document.getElementById("s-author").textContent = s.author);
+    document.getElementById("s-install") && (document.getElementById("s-install").textContent = s.installCommand);
+    document.getElementById("s-downloads") && (document.getElementById("s-downloads").textContent = s.downloads.toLocaleString() + " installs");
+    document.getElementById("s-github") && (document.getElementById("s-github").href = s.githubUrl);
+  });
+})();
+</script>
 </body>
 </html>
